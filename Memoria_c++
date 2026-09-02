@@ -1,0 +1,46 @@
+#include <iostream>
+
+int main() {
+	constexpr int elementosOriginales = 110;
+	constexpr int elementosTransferidos = 100;
+
+	int arregloOriginal[elementosOriginales];
+	int arregloTransferido[elementosTransferidos];
+
+	for (int indice = 0; indice < elementosOriginales; ++indice) {
+		arregloOriginal[indice] = indice + 1;
+	}
+
+	std::cout << "Primeros 5 elementos iniciales: ";
+	for (int indice = 0; indice < 5; ++indice) {
+		std::cout << arregloOriginal[indice] << ' ';
+	}
+	std::cout << "\nUltimos 5 elementos iniciales: ";
+	for (int indice = elementosOriginales - 5; indice < elementosOriginales; ++indice) {
+		std::cout << arregloOriginal[indice] << ' ';
+	}
+	std::cout << "\n\nElementos transferidos (100):\n";
+
+	for (int indice = 0; indice < elementosTransferidos; ++indice) {
+		arregloTransferido[indice] = arregloOriginal[indice];
+		arregloOriginal[indice] = 0;
+		std::cout << arregloTransferido[indice] << ' ';
+
+		if ((indice + 1) % 10 == 0) {
+			std::cout << '\n';
+		}
+	}
+
+	bool originalesEnCero = true;
+	for (int indice = 0; indice < elementosTransferidos; ++indice) {
+		if (arregloOriginal[indice] != 0) {
+			originalesEnCero = false;
+			break;
+		}
+	}
+
+	std::cout << "\nValidacion de ceros en el arreglo original: "
+			  << (originalesEnCero ? "CORRECTA" : "ERROR") << '\n';
+
+	return originalesEnCero ? 0 : 1;
+}
